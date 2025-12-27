@@ -17,6 +17,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          submodules: false
+
+      - name: Clean up invalid submodule references
+        run: |
+          # Remove invalid submodule references to prevent cleanup errors
+          git config --file .git/config --get-regexp '^submodule\..*\.path$' 2>/dev/null | while read key path; do
+            if [ ! -f .gitmodules ] || ! grep -q "path = $path" .gitmodules 2>/dev/null; then
+              submodule_name=$(echo "$key" | sed 's/^submodule\.\(.*\)\.path$/\1/')
+              echo "Removing invalid submodule reference: $submodule_name ($path)"
+              git config --file .git/config --remove-section "submodule.$submodule_name" 2>/dev/null || true
+            fi
+          done || true
 
       - name: Deploy to cPanel via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
