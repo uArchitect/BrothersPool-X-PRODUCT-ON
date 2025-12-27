@@ -30,16 +30,28 @@ jobs:
             fi
           done || true
 
-      - name: Delete old files from server
+      - name: Delete old files and reset state
         run: |
           apt-get update && apt-get install -y lftp
+          echo "Deleting old warehouses.blade.php file..."
           lftp -c "
           set ftp:ssl-allow no;
+          set net:timeout 30;
           open -u developer@brothersbaro.com,uqurcan0302 ftp.brothersbaro.com;
           cd /public_html/pool/resources/views;
           rm -f warehouses.blade.php;
           quit
-          " || echo "File may not exist, continuing..."
+          " || echo "⚠️ Could not delete file (may not exist)"
+          
+          echo "Deleting state file to force full sync..."
+          lftp -c "
+          set ftp:ssl-allow no;
+          set net:timeout 30;
+          open -u developer@brothersbaro.com,uqurcan0302 ftp.brothersbaro.com;
+          cd /public_html/pool;
+          rm -f .ftp-deploy-sync-state.json;
+          quit
+          " || echo "⚠️ Could not delete state file (may not exist)"
 
       - name: Deploy to cPanel via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
