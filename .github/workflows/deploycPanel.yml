@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:  # Manuel çalıştırma seçeneği
+  workflow_dispatch:  # Manuel çalıştırma seçeneği2
 
 jobs:
   deploy:
