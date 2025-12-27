@@ -10,7 +10,7 @@ jobs:
   deploy:
     name: Deploy to cPanel via FTP
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     
     steps:
       - name: Checkout code
@@ -24,11 +24,11 @@ jobs:
           server: ftp.brothersbaro.com
           username: developer@brothersbaro.com
           password: uqurcan0302
-          protocol: ftps
+          protocol: ftp
           server-dir: /public_html/pool/
           dangerous-clean-slate: false
           dry-run: false
-          log-level: minimal
+          log-level: verbose
           state-name: .ftp-deploy-sync-state.json
           exclude: |
             **/.git*
