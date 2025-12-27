@@ -61,6 +61,30 @@ jobs:
           quit
           " || echo "⚠️ Could not delete state file (may not exist)"
 
+      - name: Force upload warehouses22.blade.php via FTP
+        run: |
+          apt-get update && apt-get install -y lftp
+          echo "📤 Force uploading warehouses22.blade.php..."
+          echo "📁 Current directory: $(pwd)"
+          echo "📁 Checking file: $(ls -la resources/views/warehouses22.blade.php 2>&1 || echo 'File not found')"
+          if [ -f "resources/views/warehouses22.blade.php" ]; then
+            lftp -c "
+            set ftp:ssl-allow no;
+            set net:timeout 30;
+            set ftp:list-options -a;
+            open -u developer@brothersbaro.com,uqurcan0302 ftp.brothersbaro.com;
+            cd /public_html/pool/resources/views;
+            lcd resources/views;
+            put -E warehouses22.blade.php;
+            echo '✅ warehouses22.blade.php uploaded successfully';
+            ls -la warehouses22.blade.php;
+            quit
+            "
+          else
+            echo "❌ File not found: resources/views/warehouses22.blade.php"
+            exit 1
+          fi
+
       - name: Deploy to cPanel via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:

@@ -1303,7 +1303,7 @@ class DashboardController extends Controller
         $this->data['warehouses'] = DB::table('warehouses')->join('employees', 'warehouses.manager', '=', 'employees.id')->select('warehouses.*', 'employees.name as manager_name')->get();
         $this->data['staff'] = DB::table('employees')->get();
         $this->data['employees'] = DB::table('employees')->get(); // Add employees for the view
-        return view('warehouses', $this->data);
+        return view('warehouses22', $this->data);
     }
 
     /**
