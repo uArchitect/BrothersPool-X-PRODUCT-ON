@@ -40,11 +40,15 @@ jobs:
           set ftp:list-options -a;
           open -u developer@brothersbaro.com,uqurcan0302 ftp.brothersbaro.com;
           cd /public_html/pool/resources/views;
+          echo '📋 Current files:';
           ls -la warehouses*.blade.php;
+          echo '🗑️ Deleting old warehouses.blade.php...';
           rm -f warehouses.blade.php;
-          echo '✅ Old warehouses.blade.php deleted (if existed)';
+          echo '🗑️ Deleting warehouses22.blade.php to force re-upload...';
+          rm -f warehouses22.blade.php;
+          echo '✅ Old files deleted';
           quit
-          " || echo "⚠️ Could not delete file (may not exist)"
+          " || echo "⚠️ Could not delete files (may not exist)"
           
           echo "🗑️ Deleting state file to force full sync..."
           lftp -c "
@@ -69,7 +73,8 @@ jobs:
           dry-run: false
           log-level: verbose
           # State dosyasını kullanmıyoruz - her seferinde tam sync yapıyoruz
-          # state-name: .ftp-deploy-sync-state.json
+          # state-name parametresini kaldırdık ama action yine de oluşturuyor
+          # Bu yüzden deployment sonrası sileceğiz
           exclude: |
             **/.git*
             **/.git*/**
@@ -117,6 +122,21 @@ jobs:
             **/auth.json
             **/.phpactor.json
             **/.ftp-deploy-sync-state.json
+
+      - name: Clean up state file after deployment
+        if: success()
+        run: |
+          apt-get update && apt-get install -y lftp
+          echo "🧹 Cleaning up state file after deployment..."
+          lftp -c "
+          set ftp:ssl-allow no;
+          set net:timeout 30;
+          open -u developer@brothersbaro.com,uqurcan0302 ftp.brothersbaro.com;
+          cd /public_html/pool;
+          rm -f .ftp-deploy-sync-state.json;
+          echo '✅ State file cleaned up';
+          quit
+          " || echo "⚠️ Could not delete state file"
 
       - name: Deployment Summary
         if: success()
