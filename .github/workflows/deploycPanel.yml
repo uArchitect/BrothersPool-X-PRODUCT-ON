@@ -1,0 +1,76 @@
+name: Deploy to cPanel
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Manuel çalıştırma seçeneği
+
+jobs:
+  deploy:
+    name: Deploy to cPanel via FTP
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Deploy to cPanel via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ftp.brothersbaro.com
+          username: developer@brothersbaro.com
+          password: uqurcan0302
+          protocol: ftps
+          server-dir: /public_html/pool/
+          dangerous-clean-slate: false
+          dry-run: false
+          log-level: minimal
+          state-name: .ftp-deploy-sync-state.json
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/vendor/**
+            **/storage/**
+            **/bootstrap/cache/**
+            **/.github/**
+            **/.env*
+            **/.env.*
+            **/*.log
+            **/*.md
+            **/*.zip
+            **/*.tar.gz
+            **/*.rar
+            **/package*.json
+            **/yarn.lock
+            **/.npm/**
+            **/.yarn/**
+            **/tests/**
+            **/test/**
+            **/*.test.*
+            **/*.spec.*
+            **/.DS_Store
+            **/Thumbs.db
+            **/.idea/**
+            **/.vscode/**
+            **/*.sql
+            **/public/eski/**
+            **/public/demo/**
+
+      - name: Deployment Summary
+        if: success()
+        run: |
+          echo "✅ Deployment completed successfully!"
+          echo "🚀 Files deployed to cPanel"
+          echo "📅 Deployment time: $(date)"
+
+      - name: Deployment Failed Notification
+        if: failure()
+        run: |
+          echo "❌ Deployment failed!"
+          echo "Please check the logs above for details."
+          exit 1

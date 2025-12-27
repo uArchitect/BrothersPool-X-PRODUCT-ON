@@ -1,0 +1,151 @@
+body {
+    background-color: #eef2f5; /* Daha açık bir arka plan */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+    color: #333; /* Genel metin rengi */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6; /* Daha iyi okunabilirlik */
+}
+
+.kanban-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    flex-wrap: wrap; /* Esnek sarmalama */
+}
+
+.kanban-column {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    height: auto; /* Otomatik yükseklik */
+    flex: 1 1 calc(30% - 20px); /* Üç sütun düzeni */
+    margin: 10px; /* Kolonlar arasında boşluk */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.kanban-column:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.kanban-list {
+    min-height: 300px;
+    padding: 10px;
+    background-color: #f7f9fc;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Taşan içerik için kaydırma çubuğu */
+}
+
+.kanban-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative; /* İçerik üzerine gelen öğeler için */
+}
+
+.kanban-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.kanban-card h6 {
+    font-size: 1.5rem; /* Daha büyük başlık */
+    font-weight: bold;
+    color: #007bff; /* Başlık rengi */
+    margin-bottom: 10px; /* Başlık ile metin arası */
+}
+
+.kanban-card p {
+    margin: 0;
+    font-size: 0.95rem; /* Biraz daha büyük metin */
+    color: #555; /* Açıklama rengi */
+}
+
+.kanban-card .form-group {
+    margin-bottom: 15px; /* Form elemanları arası boşluk */
+}
+
+.kanban-card .btn {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 10px; /* Düğme üstü boşluk */
+    width: 100%; /* Düğme genişliği */
+    text-align: center; /* Düğme metnini ortala */
+}
+
+.kanban-card .btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.release-btn {
+    background-color: #dc3545; /* Kırmızı renk */
+}
+
+.release-btn:hover {
+    background-color: #c82333; /* Daha koyu kırmızı */
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: #777; /* Daha açık metin rengi */
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+    .kanban-container {
+        flex-direction: column;
+    }
+
+    .kanban-column {
+        margin-bottom: 20px; /* Mobilde boşluk */
+        flex: 1 1 100%; /* Tek sütun */
+    }
+}
+
+/* Duyarlı form elemanları */
+input.form-control,
+select.form-control {
+    border-radius: 6px; /* Duyarlı form elemanları için köşe yuvarlama */
+    border: 1px solid #ccc; /* Kenar rengi */
+    transition: border-color 0.3s; /* Kenar rengi geçişi */
+}
+
+input.form-control:focus,
+select.form-control:focus {
+    border-color: #007bff; /* Odaklanıldığında kenar rengi */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Odaklanıldığında gölge */
+}
+
+/* Yazı tipi ve genel stiller */
+h4,
+h5 {
+    font-weight: bold;
+    color: #333; /* Başlık rengi */
+    margin-bottom: 15px; /* Başlık ile altındaki içerik arasında boşluk */
+}
+
+.breadcrumb {
+    background-color: transparent; /* Ekmek kırıntısı için arka planı şeffaf yap */
+}
+
+.breadcrumb-item a {
+    color: #007bff; /* Bağlantı rengi */
+}
+
+.breadcrumb-item.active {
+    color: #555; /* Aktif durum rengi */
+}

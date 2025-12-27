@@ -1,0 +1,456 @@
+:root {
+    --primary-color: #043124;
+    /* Feminen yumuşak pembe */
+    --secondary-color: #fdf6f0;
+    /* Açık krem */
+    --accent-color: #f8b195;
+    /* Mercan tonları */
+    --light-bg: #ffffff;
+    --text-color: #4d4d4d;
+    --muted-color: #6c757d;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+}
+
+body {
+    background: linear-gradient(135deg,
+            rgba(253, 246, 240, 0.95),
+            rgba(255, 255, 255, 0.95)),
+        url("https://www.transparenttextures.com/patterns/purty-wood.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: "Poppins", sans-serif;
+    padding: 20px;
+    transition: background var(--transition-speed) ease;
+}
+
+header {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+}
+
+.navbar-logo {
+    height: 40px;
+}
+
+.page-logo-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #6a1b9a;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: transform var(--transition-speed) ease;
+    margin-left: 10px;
+}
+
+.page-logo-text span {
+    color: var(--primary-color);
+}
+
+.container-custom {
+    max-width: 900px;
+    margin: auto;
+}
+
+/* Kart Stilleri */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px var(--shadow-color);
+    margin-bottom: 30px;
+    overflow: hidden;
+    background: var(--light-bg);
+    transition: transform var(--transition-speed) ease,
+        box-shadow var(--transition-speed) ease;
+}
+
+.card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 12px 30px var(--shadow-color);
+}
+
+.card-header {
+    background: var(--primary-color);
+    color: var(--light-bg);
+    font-size: 1.6rem;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.form-control,
+.form-select {
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+    transition: border-color var(--transition-speed) ease,
+        box-shadow var(--transition-speed) ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(255, 111, 145, 0.5);
+}
+
+.btn {
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all var(--transition-speed) ease;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-back {
+    background: #ced4da;
+    color: var(--text-color);
+    border: none;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Progress Bar */
+.progress-container {
+    margin-bottom: 20px;
+}
+
+.progress {
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 5px;
+}
+
+.progress-bar {
+    border-radius: 5px;
+    transition: width 0.4s ease;
+}
+
+.step-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* Hizmet Kartları */
+.service-card {
+    cursor: pointer;
+    transition: transform var(--transition-speed),
+        box-shadow var(--transition-speed),
+        border-color var(--transition-speed);
+    border: 2px solid transparent;
+    border-radius: 15px;
+    overflow: hidden;
+    background: var(--light-bg);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.service-card.selected {
+    border-color: var(--primary-color);
+    background: #fff0f5;
+}
+
+.service-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    filter: brightness(0.95);
+    transition: filter var(--transition-speed) ease;
+}
+
+.service-card:hover img {
+    filter: brightness(1);
+}
+
+.service-card .card-body {
+    padding: 0.75rem 1rem;
+}
+
+.service-card .card-title {
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Personel Kartı Stilleri */
+.personnel-card {
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.personnel-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.personnel-card.selected {
+    border-color: var(--primary-color);
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Tarih & Saat Seçimi */
+.date-selector,
+.time-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.time-box {
+    padding: 10px 20px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background: #f8f9fa;
+    cursor: pointer;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    text-align: center;
+}
+
+.time-box.selected {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+
+.time-box.reserved {
+    background: #fc002a;
+    color: #fff;
+    cursor: not-allowed;
+}
+
+/* Onaylama Kartı */
+.invoice-container {
+    max-width: 700px;
+    margin: auto;
+    padding: 30px;
+    background: var(--light-bg);
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    font-size: 0.95rem;
+    color: var(--text-color);
+    transition: transform var(--transition-speed) ease;
+}
+
+.invoice-container:hover {
+    transform: scale(1.02);
+}
+
+.invoice-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.invoice-header h2 {
+    margin-bottom: 5px;
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.invoice-header p {
+    margin: 0;
+    font-style: italic;
+    color: var(--muted-color);
+}
+
+.company-info {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.invoice-details,
+.invoice-total {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    background: #fdf6f0;
+}
+
+.invoice-details table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.invoice-details th,
+.invoice-details td {
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+    text-align: left;
+}
+
+.invoice-details th {
+    background: #f8b19533;
+}
+
+.invoice-total {
+    text-align: right;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Mobil cihazlar için (telefonlar, 600px ve altı) */
+@media (max-width: 600px) {
+    .container-custom,
+    .invoice-container {
+        padding: 10px;
+        max-width: 100%;
+    }
+    .card,
+    .service-card,
+    .personnel-card {
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+    .card-header {
+        font-size: 1.1rem;
+        padding: 0.75rem 1rem;
+    }
+    .card-body {
+        padding: 1rem;
+    }
+    .service-card img {
+        height: 100px;
+    }
+    .date-selector,
+    .time-options {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .step-labels {
+        font-size: 0.8rem;
+    }
+    .invoice-header h2 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Tabletler için (601px - 900px arası) */
+@media (min-width: 601px) and (max-width: 900px) {
+    .container-custom,
+    .invoice-container {
+        max-width: 95%;
+        padding: 20px;
+    }
+    .card-header {
+        font-size: 1.3rem;
+        padding: 1rem 1.2rem;
+    }
+    .service-card img {
+        height: 120px;
+    }
+    .date-selector,
+    .time-options {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
+
+/* Küçük telefonlar için (400px ve altı) */
+@media (max-width: 400px) {
+    .container-custom,
+    .invoice-container {
+        padding: 5px;
+    }
+    .card-header {
+        font-size: 1rem;
+    }
+    .service-card img {
+        height: 70px;
+    }
+    .step-labels {
+        font-size: 0.7rem;
+    }
+}
+
+/* Büyük telefonlar için (401px - 600px) */
+@media (min-width: 401px) and (max-width: 600px) {
+    .container-custom,
+    .invoice-container {
+        padding: 10px;
+    }
+    .card-header {
+        font-size: 1.1rem;
+    }
+    .service-card img {
+        height: 90px;
+    }
+}
+
+/* Küçük tabletler için (601px - 800px) */
+@media (min-width: 601px) and (max-width: 800px) {
+    .container-custom,
+    .invoice-container {
+        max-width: 98%;
+        padding: 15px;
+    }
+    .card-header {
+        font-size: 1.2rem;
+    }
+    .service-card img {
+        height: 110px;
+    }
+}
+
+/* Büyük tabletler ve küçük dizüstüler için (801px - 1100px) */
+@media (min-width: 801px) and (max-width: 1100px) {
+    .container-custom,
+    .invoice-container {
+        max-width: 90%;
+        padding: 20px;
+    }
+    .card-header {
+        font-size: 1.3rem;
+    }
+    .service-card img {
+        height: 130px;
+    }
+}
+
+/* Genel: Kartlar ve gridler için esneklik */
+@media (max-width: 900px) {
+    .date-selector,
+    .time-options {
+        flex-direction: column !important;
+        gap: 6px;
+    }
+    .service-card,
+    .personnel-card {
+        width: 100%;
+        min-width: unset;
+    }
+    .card-body {
+        padding: 0.7rem;
+    }
+}
+
+/* Tüm cihazlarda kutuların taşmasını engelle */
+* {
+    box-sizing: border-box;
+    word-break: break-word;
+}
