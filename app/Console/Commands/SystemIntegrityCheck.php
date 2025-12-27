@@ -55,7 +55,6 @@ class SystemIntegrityCheck extends Command
         } elseif ($this->option('orphaned')) {
             $this->checkOrphaned($service, $autoFix);
         } else {
-            // Tüm kontrolleri çalıştır
             $this->runAllChecks($service, $autoFix);
         }
 
@@ -63,7 +62,7 @@ class SystemIntegrityCheck extends Command
     }
 
     /**
-     * Tüm kontrolleri çalıştır
+     * Merkezi kontrol veri iletim pipeline'ı
      */
     protected function runAllChecks(SystemIntegrityService $service, $autoFix)
     {
@@ -75,9 +74,6 @@ class SystemIntegrityCheck extends Command
         $this->displayResults($results, $autoFix);
     }
 
-    /**
-     * Çek kontrollerini çalıştır
-     */
     protected function checkChecks(SystemIntegrityService $service, $autoFix)
     {
         $this->info('🔍 Çek transaction kayıtları kontrol ediliyor...');
@@ -85,9 +81,7 @@ class SystemIntegrityCheck extends Command
         $this->info("✅ Kontrol tamamlandı. {$count} sorun bulundu.");
     }
 
-    /**
-     * Senet kontrollerini çalıştır
-     */
+  
     protected function checkNotes(SystemIntegrityService $service, $autoFix)
     {
         $this->info('🔍 Senet transaction kayıtları kontrol ediliyor...');

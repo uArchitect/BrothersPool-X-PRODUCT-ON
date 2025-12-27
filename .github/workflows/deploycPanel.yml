@@ -30,6 +30,17 @@ jobs:
             fi
           done || true
 
+      - name: Delete old files from server
+        run: |
+          apt-get update && apt-get install -y lftp
+          lftp -c "
+          set ftp:ssl-allow no;
+          open -u developer@brothersbaro.com,uqurcan0302 ftp.brothersbaro.com;
+          cd /public_html/pool/resources/views;
+          rm -f warehouses.blade.php;
+          quit
+          " || echo "File may not exist, continuing..."
+
       - name: Deploy to cPanel via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
