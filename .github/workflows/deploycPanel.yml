@@ -30,9 +30,12 @@ jobs:
             fi
           done || true
 
+      - name: Install lftp
+        run: |
+          sudo apt-get update && sudo apt-get install -y lftp
+
       - name: Delete old files and reset state
         run: |
-          apt-get update && apt-get install -y lftp
           echo "🔍 Connecting to FTP server..."
           lftp -c "
           set ftp:ssl-allow no;
@@ -63,7 +66,6 @@ jobs:
 
       - name: Force upload warehouses22.blade.php via FTP
         run: |
-          apt-get update && apt-get install -y lftp
           echo "📤 Force uploading warehouses22.blade.php..."
           echo "📁 Current directory: $(pwd)"
           echo "📁 Checking file: $(ls -la resources/views/warehouses22.blade.php 2>&1 || echo 'File not found')"
@@ -150,7 +152,6 @@ jobs:
       - name: Clean up state file after deployment
         if: success()
         run: |
-          apt-get update && apt-get install -y lftp
           echo "🧹 Cleaning up state file after deployment..."
           lftp -c "
           set ftp:ssl-allow no;
