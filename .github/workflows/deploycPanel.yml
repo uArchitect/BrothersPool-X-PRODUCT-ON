@@ -33,23 +33,27 @@ jobs:
       - name: Delete old files and reset state
         run: |
           apt-get update && apt-get install -y lftp
-          echo "Deleting old warehouses.blade.php file..."
+          echo "🔍 Connecting to FTP server..."
           lftp -c "
           set ftp:ssl-allow no;
           set net:timeout 30;
+          set ftp:list-options -a;
           open -u developer@brothersbaro.com,uqurcan0302 ftp.brothersbaro.com;
           cd /public_html/pool/resources/views;
+          ls -la warehouses*.blade.php;
           rm -f warehouses.blade.php;
+          echo '✅ Old warehouses.blade.php deleted (if existed)';
           quit
           " || echo "⚠️ Could not delete file (may not exist)"
           
-          echo "Deleting state file to force full sync..."
+          echo "🗑️ Deleting state file to force full sync..."
           lftp -c "
           set ftp:ssl-allow no;
           set net:timeout 30;
           open -u developer@brothersbaro.com,uqurcan0302 ftp.brothersbaro.com;
           cd /public_html/pool;
           rm -f .ftp-deploy-sync-state.json;
+          echo '✅ State file deleted';
           quit
           " || echo "⚠️ Could not delete state file (may not exist)"
 
@@ -64,7 +68,8 @@ jobs:
           dangerous-clean-slate: false
           dry-run: false
           log-level: verbose
-          state-name: .ftp-deploy-sync-state.json
+          # State dosyasını kullanmıyoruz - her seferinde tam sync yapıyoruz
+          # state-name: .ftp-deploy-sync-state.json
           exclude: |
             **/.git*
             **/.git*/**
@@ -111,6 +116,7 @@ jobs:
             **/Homestead.yaml
             **/auth.json
             **/.phpactor.json
+            **/.ftp-deploy-sync-state.json
 
       - name: Deployment Summary
         if: success()
