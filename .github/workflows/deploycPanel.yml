@@ -35,7 +35,11 @@ jobs:
             **/.git*/**
             **/node_modules/**
             **/vendor/**
-            **/storage/**
+            **/storage/logs/**
+            **/storage/pail/**
+            **/storage/framework/cache/**
+            **/storage/framework/sessions/**
+            **/storage/framework/views/**
             **/bootstrap/cache/**
             **/.github/**
             **/.env*
@@ -51,15 +55,27 @@ jobs:
             **/.yarn/**
             **/tests/**
             **/test/**
+            **/phpunit.xml
+            **/.phpunit.cache
+            **/.phpunit.result.cache
             **/*.test.*
             **/*.spec.*
             **/.DS_Store
             **/Thumbs.db
             **/.idea/**
             **/.vscode/**
+            **/.fleet/**
+            **/.zed/**
             **/*.sql
             **/public/eski/**
             **/public/demo/**
+            **/public/build/**
+            **/public/hot
+            **/.editorconfig
+            **/Homestead.json
+            **/Homestead.yaml
+            **/auth.json
+            **/.phpactor.json
 
       - name: Deployment Summary
         if: success()
